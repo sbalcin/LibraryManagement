@@ -11,7 +11,7 @@ import com.snn.library.beans.Book;
 public class Common {
 	public static boolean checkCaptcha(Book book) {
 		try {
-			String privateKey = "6Ld82vwSAAAAACBpaO2BDA4djrQelbK-tnlROGdt";
+			String privateKey = "6Ldb7PwSAAAAACQD-7Dddx7C1PD5S1C4G4V3-MND";
 			String remoteIp = "127.0.0.1";
 			String searchUri = "http://www.google.com/recaptcha/api/verify?privatekey=" + privateKey + "&remoteip=" + remoteIp + "&challenge="
 					+ book.getCaptchaChallenge() + "&response=" + book.getCaptchaResponse().replace(" ", "%20");
