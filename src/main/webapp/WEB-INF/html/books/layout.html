@@ -1,0 +1,95 @@
+<script type="text/javascript">
+    function showCaptcha() { 
+        Recaptcha.destroy();
+        Recaptcha.create('6Ld82vwSAAAAANov8Yd_72VrP3o9kUQy2gRktwo4', 'CaptchaContainer', {
+            theme: 'red',
+            callback: Recaptcha.focus_response_field
+        });
+    };
+</script>
+
+<button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="openModal()" onclick="showCaptcha()">Add Book</button>
+<hr />
+<div class="alert alert-info" ng-show="books.length == 0">No books found</div>
+<table class="table table-bordered table-striped" ng-show="books.length > 0">
+	<thead>
+		<tr>			
+			<th style="text-align: center;">Name</th>
+			<th style="text-align: center;">Author</th>
+			<th style="text-align: center;">Quantity</th>
+			<th style="text-align: center;">Popular</th>
+			<th style="text-align: center;">Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="book in books | orderBy:predicate">			
+			<td>{{book.name}}</td>
+			<td>{{book.author}}</td>
+			<td>{{book.quantity}}</td>
+			<td style="text-align: center; width: 20px;"><span ng-show="book.popular" class="icon-ok"></span></td>
+			<td style="width: 100px; text-align: center;">
+				<button class="btn btn-mini btn-danger" ng-confirm-click confirmed-click="removeBook(book.id)">Remove</button>
+				<button class="btn btn-mini btn-success" ng-click="editBook(book)">Edit</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form class="form-horizontal">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only"></span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel" ng-hide="editMode">Add Book</h4>
+					<h4 class="modal-title" id="myModalLabel" ng-show="editMode">Update Book</h4>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-error" ng-show="error">{{errorMessage}}</div>
+					<div class="control-group">
+						<label class="control-label" for="inputEmail">Name</label>
+
+						<div class="controls">
+							<input type="text" id="inputEmail" ng-model="book.name" placeholder="Book Name" required min="2">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="inputEmail">Author</label>
+
+						<div class="controls">
+							<input type="text" id="inputEmail" ng-model="book.author" placeholder=Author required min="2">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="inputEmail" valid-number>Quantity</label>
+
+						<div class="controls">
+							<input type="text" id="inputSpeed" only-digits ng-model="book.quantity" placeholder="Quantity" required min="1">
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<label class="checkbox"> <input type="checkbox" ng-model="book.popular"> Is Popular
+							</label>
+						</div>					
+					</div>
+					
+				<div ng-hide="editMode" id="CaptchaContainer"></div>
+					
+				</div>
+				<div class="modal-footer">
+					<div class="controls">
+						<button type="button" class="btn btn-primary" ng-disabled="!book.name || !book.author" ng-hide="editMode"
+							ng-click="addNewBook(book)">Add Book</button>
+						<button type="button" class="btn btn-primary" ng-disabled="!book.name || !book.author" ng-show="editMode"
+							ng-click="updateBook(book)">Save Book</button>
+						<button type="button" class="btn" ng-click="resetBookForm()">Reset</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
