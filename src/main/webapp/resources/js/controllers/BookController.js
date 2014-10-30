@@ -104,3 +104,11 @@ var BookController = function($scope, $http) {
     };    
     
 };
+
+function showCaptcha() { 
+    Recaptcha.destroy();
+    Recaptcha.create('6Ld82vwSAAAAANov8Yd_72VrP3o9kUQy2gRktwo4', 'CaptchaContainer', {
+        theme: 'red',
+        callback: Recaptcha.focus_response_field
+    });
+};

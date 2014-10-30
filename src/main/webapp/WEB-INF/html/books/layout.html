@@ -1,13 +1,3 @@
-<script type="text/javascript">
-    function showCaptcha() { 
-        Recaptcha.destroy();
-        Recaptcha.create('6Ld82vwSAAAAANov8Yd_72VrP3o9kUQy2gRktwo4', 'CaptchaContainer', {
-            theme: 'red',
-            callback: Recaptcha.focus_response_field
-        });
-    };
-</script>
-
 <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="openModal()" onclick="showCaptcha()">Add Book</button>
 <hr />
 <div class="alert alert-info" ng-show="books.length == 0">No books found</div>
