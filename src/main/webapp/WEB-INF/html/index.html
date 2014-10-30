@@ -15,7 +15,20 @@
 <script src="resources/js/directives.js"></script>
 <script src="resources/js/ui-bootstrap-tpls-0.11.2.min.js"></script>
 
-<script type="text/javascript" src="https://www.google.com/recaptcha/api/js/recaptcha_ajax.js "></script>
+<script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+
+<script type="text/javascript">
+    function showCaptcha() {
+    	console.log("Destroy");
+        Recaptcha.destroy();
+        console.log("Create");
+        Recaptcha.create('6Ld82vwSAAAAANov8Yd_72VrP3o9kUQy2gRktwo4', 'CaptchaContainer', {
+            theme: 'red',
+            callback: Recaptcha.focus_response_field
+        });
+        console.log("End");
+    };
+</script>
 </head>
 
 <body>
